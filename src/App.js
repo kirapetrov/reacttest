@@ -6,7 +6,7 @@ const getSessionKey = state => state.sessionKey;
 
 function App() {
 
-  const sessionKey = useSelector(getSessionKey);  
+  const sessionKey = useSelector(getSessionKey);
 
   return (
     <div className="App">
