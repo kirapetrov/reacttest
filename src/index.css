@@ -18,7 +18,11 @@ html * {
     font-size: 0.75em;
     margin: 5px 0px 0px 0px;
     padding: 5px 2px 5px 4px;
+    border-width: 1px;
     border-radius:0px;
+
+    
+    
     -webkit-border-radius: 0px;
   }
 
