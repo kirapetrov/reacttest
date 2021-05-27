@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
+import { useAppSelector, useAppDispatch } from '../../hooks'
 
-import { authorize } from './authorizationSlice'
 import { Credential } from './Credential'
 import { Addresses } from './Addresses'
 
@@ -19,15 +19,33 @@ const Authorization = () => {
         isCredentialComponentActive,
         changeCredentialComponentActivity] = useState(true);
 
-    const dispatch = useDispatch();
+    const count = useAppSelector(state => state.authorization)
+    const dispatch = useDispatch()
 
     const handleCredentialComponentActivityChange = () =>
         changeCredentialComponentActivity(!isCredentialComponentActive);
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         dispatch(authorize(login, password, ipAddress, nginxAddress));
         e.preventDefault();
     };
+
+    function authorize(
+        login: string,
+        password: string,
+        ipAddress: string,
+        nginxAddress: string) {
+
+        return function authorizeThunk(dispatch: any, getState: any) {
+            // const response = await client.post('/fakeApi/todos', { todo: initialTodo })
+            setTimeout(() => {
+                dispatch({
+                    type: 'authorization/authorized',
+                    payload: `${login} - ${password} - ${ipAddress} - ${nginxAddress}`
+                })
+            }, 5000)
+        }
+    }
 
     const activeControl = isCredentialComponentActive
         ? <Credential
@@ -47,7 +65,7 @@ const Authorization = () => {
         <form onSubmit={handleSubmit}>
             <SwitchTransition>
                 <CSSTransition
-                    key={isCredentialComponentActive}
+                    key={`${isCredentialComponentActive}`}
                     addEndListener={(node, done) => {
                         node.addEventListener("transitionend", done, false);
                     }}

@@ -1,10 +1,24 @@
 import React from 'react'
 
-export function Addresses(props) {
+type Props = {
+    ipAddress: string,
+    nginxAddress: string
 
-    const handleIpAddressChange = e => props.onIpAddressChange(e.target.value);
-    const handleNginxAddressChange = e => props.onNginxAddressChange(e.target.value);
-    const handleActivityChange = e => props.onActivityChange(); 
+    onIpAddressChange(value: string): void 
+    onNginxAddressChange(value: string): void
+    onActivityChange(): void
+}
+
+export function Addresses(props: Props) {
+
+    
+    const handleIpAddressChange = (e: React.ChangeEvent<HTMLInputElement>): void => 
+            props.onIpAddressChange(e.currentTarget.value);
+
+    const handleNginxAddressChange = (e: React.ChangeEvent<HTMLInputElement>): void => 
+            props.onNginxAddressChange(e.currentTarget.value);
+            
+    const handleActivityChange = (): void => props.onActivityChange(); 
     
     return (
         <div>

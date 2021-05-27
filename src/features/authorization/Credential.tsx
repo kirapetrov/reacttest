@@ -1,10 +1,23 @@
 import React from 'react'
 
-export function Credential(props) {
+type Props = {
+    login: string,
+    password: string
 
-    const handleLoginChange = e => props.onLoginChange(e.target.value);
-    const handlePasswordChange = e => props.onPasswordChange(e.target.value);
-    const handleActivityChange = e => props.onActivityChange();        
+    onLoginChange(value: string): void 
+    onPasswordChange(value: string): void
+    onActivityChange(): void
+}
+
+export function Credential(props: Props ) {
+
+    const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>): void => 
+            props.onLoginChange(e.currentTarget.value);
+
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => 
+            props.onPasswordChange(e.currentTarget.value);
+            
+    const handleActivityChange = (): void => props.onActivityChange();        
 
     return (
         <div>

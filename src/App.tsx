@@ -1,8 +1,11 @@
-import React from 'react'
 import Authorization from './features/authorization/Authorization'
 import { useSelector } from 'react-redux'
 
-const getSessionKey = state => state.sessionKey;
+type State = {
+  sessionKey: string 
+}
+
+const getSessionKey = (state: State) => state.sessionKey;
 
 function App() {
 
